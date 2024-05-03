@@ -37,4 +37,12 @@ public class Room : MonoBehaviour
         if (roomRight)doorNumber ++;
 
     }
+    //判斷人物是否接觸到房間
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Player")) 
+        {
+            CameraController.instance.ChangeTarget(transform);
+        }    
+    }
 }

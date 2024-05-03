@@ -34,7 +34,7 @@ public class RoomGenerator : MonoBehaviour
     public LayerMask roomLayer;
 
     //生成列表保存產生的關卡
-    public List<GameObject> rooms = new List<GameObject>();
+    public List<Room> rooms = new List<Room>();
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +42,7 @@ public class RoomGenerator : MonoBehaviour
         //生成房間
         for(int i = 0; i < roomNumber; i++) {
             //生成，且不旋轉
-            rooms.Add(Instantiate(roomPrefab,generatorPoint.position,Quaternion.identity));
+            rooms.Add(Instantiate(roomPrefab,generatorPoint.position,Quaternion.identity).GetComponent<Room>());
             //改變位置
             ChangePointPos();
         }
@@ -52,16 +52,19 @@ public class RoomGenerator : MonoBehaviour
         rooms[0].GetComponent<SpriteRenderer>().color = startColor;    
 
         //預設為初始房間，這樣在比較時越比越大，離初始房間越遠
-        endRoom = rooms[0];
+        endRoom = rooms[0].gameObject;
         //檢測每個房間
         foreach (var room in rooms)
         {
-            //比較目標點和原始點距離 sqrMagnitude是一種比較方式 ()
-            if(room.transform.position.sqrMagnitude > endRoom.transform.position.sqrMagnitude) 
-            {
-                endRoom = room;
-            }
+            // //比較目標點和原始點距離 sqrMagnitude是一種比較方式 ()
+            // if(room.transform.position.sqrMagnitude > endRoom.transform.position.sqrMagnitude) 
+            // {
+            //     endRoom = room.gameObjet;
+            // }
+            SetupRoom(room,room.transform.position);
         }
+
+
         //最終房間顏色改變
         endRoom.GetComponent<SpriteRenderer>().color = endColor;
     }
@@ -99,5 +102,15 @@ public class RoomGenerator : MonoBehaviour
             }
         }while(Physics2D.OverlapCircle(generatorPoint.position,0.2f,roomLayer));
         //後執行
+    }
+
+    //TODO:判斷上下左右有沒有房間並附值
+    public void SetupRoom(Room newRoom,Vector3 roomPosition)
+    {
+        //判斷上下左右是否有其他房間
+        newRoom.roomUp = Physics2D.OverlapCircle(roomPosition + new Vector3(0,yOffset,0),0.2f,roomLayer);
+        newRoom.roomDown = Physics2D.OverlapCircle(roomPosition + new Vector3(0,-yOffset,0),0.2f,roomLayer);
+        newRoom.roomLeft = Physics2D.OverlapCircle(roomPosition + new Vector3(-xOffset,0,0),0.2f,roomLayer);
+        newRoom.roomRight = Physics2D.OverlapCircle(roomPosition + new Vector3(xOffset,0,0),0.2f,roomLayer);
     }
 }

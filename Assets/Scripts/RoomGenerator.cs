@@ -81,10 +81,10 @@ public class RoomGenerator : MonoBehaviour
     void Update()
     {
         //案任意按鍵加載當前場景
-        if(Input.anyKeyDown)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        // if(Input.anyKeyDown)
+        // {
+        //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // }
         
     }
 
@@ -126,7 +126,7 @@ public class RoomGenerator : MonoBehaviour
         newRoom.roomLeft = Physics2D.OverlapCircle(roomPosition + new Vector3(-xOffset,0,0),0.2f,roomLayer);
         newRoom.roomRight = Physics2D.OverlapCircle(roomPosition + new Vector3(xOffset,0,0),0.2f,roomLayer);
     
-        newRoom.UpdateRoom();
+        newRoom.UpdateRoom(xOffset,yOffset);
     }
 
     //找到最遠的房間

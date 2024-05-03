@@ -25,10 +25,10 @@ public class Room : MonoBehaviour
         doorDown.SetActive(roomDown);
     }
 
-    public void  UpdateRoom()
+    public void UpdateRoom(float xOffset,float yOffset)
     {
         //如何獲得初始房間和現在房間的網格距離 / 如果外面距離要改這裡也要改 /用(float)是因為12.3 為Dou 
-        stepToStart = (int)(Mathf.Abs(transform.position.x / 20) + Mathf.Abs(transform.position.y / (float)12.3));
+        stepToStart = (int)(Mathf.Abs(transform.position.x / xOffset) + Mathf.Abs(transform.position.y / (float)yOffset));
     
         stepToStartText.text = stepToStart.ToString();
         if (roomUp)doorNumber ++;

@@ -43,6 +43,7 @@ public class RoomGenerator : MonoBehaviour
     //單獨入口房間
     List<GameObject> oneWayRooms = new List<GameObject>();
 
+    public WallType wallType;
     // Start is called before the first frame update
     void Start()
     {
@@ -127,6 +128,50 @@ public class RoomGenerator : MonoBehaviour
         newRoom.roomRight = Physics2D.OverlapCircle(roomPosition + new Vector3(xOffset,0,0),0.2f,roomLayer);
     
         newRoom.UpdateRoom(xOffset,yOffset);
+
+        //產生牆壁
+        switch(newRoom.doorNumber)
+        {
+            case 1:
+                if (newRoom.roomUp)
+                    Instantiate(wallType.singleUp,roomPosition,Quaternion.identity);
+                if (newRoom.roomDown)
+                    Instantiate(wallType.singleDown,roomPosition,Quaternion.identity);
+                if (newRoom.roomLeft)
+                    Instantiate(wallType.singleLeft,roomPosition,Quaternion.identity);
+                if (newRoom.roomRight)
+                    Instantiate(wallType.singleRight,roomPosition,Quaternion.identity);
+                break;
+            case 2:
+                if (newRoom.roomUp && newRoom.roomLeft)
+                    Instantiate(wallType.doubleUL,roomPosition,Quaternion.identity);
+                if (newRoom.roomUp && newRoom.roomRight)
+                    Instantiate(wallType.doubleUR,roomPosition,Quaternion.identity);
+                if (newRoom.roomDown && newRoom.roomLeft)
+                    Instantiate(wallType.doubleDL,roomPosition,Quaternion.identity);
+                if (newRoom.roomDown && newRoom.roomRight)
+                    Instantiate(wallType.doubleDR,roomPosition,Quaternion.identity);
+                if (newRoom.roomUp && newRoom.roomDown)
+                    Instantiate(wallType.doubleUD,roomPosition,Quaternion.identity);
+                if (newRoom.roomLeft && newRoom.roomRight)
+                    Instantiate(wallType.doubleLR,roomPosition,Quaternion.identity);           
+                break;
+            case 3:
+                if (newRoom.roomUp && newRoom.roomRight && newRoom.roomDown)
+                    Instantiate(wallType.tripleURD,roomPosition,Quaternion.identity);
+                if (newRoom.roomUp && newRoom.roomLeft && newRoom.roomDown)
+                    Instantiate(wallType.tripleULD,roomPosition,Quaternion.identity);
+                if (newRoom.roomUp && newRoom.roomLeft && newRoom.roomRight)
+                    Instantiate(wallType.tripleULR,roomPosition,Quaternion.identity);
+                if (newRoom.roomDown && newRoom.roomLeft && newRoom.roomRight)
+                    Instantiate(wallType.tripleDLR,roomPosition,Quaternion.identity);
+                break;
+            case 4:
+                if (newRoom.roomUp && newRoom.roomDown && newRoom.roomLeft && newRoom.roomRight)
+                    Instantiate(wallType.fourDoors,roomPosition,Quaternion.identity);
+                break;
+        }
+
     }
 
     //找到最遠的房間
@@ -169,4 +214,14 @@ public class RoomGenerator : MonoBehaviour
             endRoom = farRooms[Random.Range(0,farRooms.Count)];
         }
     }
+}
+[System.Serializable]
+public class WallType
+{
+    public GameObject singleUp,singleDown,singleLeft,singleRight,
+                      doubleUL,doubleUR,doubleDL,doubleDR,doubleUD,doubleLR,
+                      tripleURD,tripleULD,tripleULR,tripleDLR,
+                      fourDoors;
+
+
 }

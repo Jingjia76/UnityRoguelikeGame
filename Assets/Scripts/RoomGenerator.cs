@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class RoomGenerator : MonoBehaviour
@@ -28,6 +29,7 @@ public class RoomGenerator : MonoBehaviour
     [Header("位置控制")]
     //Point
     public Transform generatorPoint;
+    public Transform Generate_Room_Door;
     //位移變量
     public float xOffset;
     public float yOffset;
@@ -43,6 +45,7 @@ public class RoomGenerator : MonoBehaviour
     //單獨入口房間
     List<GameObject> oneWayRooms = new List<GameObject>();
 
+    //房間的牆~
     public WallType wallType;
     // Start is called before the first frame update
     void Start()
@@ -50,7 +53,7 @@ public class RoomGenerator : MonoBehaviour
         //生成房間
         for(int i = 0; i < roomNumber; i++) {
             //生成，且不旋轉
-            rooms.Add(Instantiate(roomPrefab,generatorPoint.position,Quaternion.identity).GetComponent<Room>());
+            rooms.Add(Instantiate(roomPrefab,generatorPoint.position,Quaternion.identity,Generate_Room_Door).GetComponent<Room>());
             //改變位置
             ChangePointPos();
         }
@@ -76,6 +79,9 @@ public class RoomGenerator : MonoBehaviour
 
         //最終房間顏色改變
         endRoom.GetComponent<SpriteRenderer>().color = endColor;
+        //將最後一關改顏色
+        endRoom.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.red;
+        // endRoom.tag = "AAA";
     }
 
     // Update is called once per frame
@@ -134,41 +140,41 @@ public class RoomGenerator : MonoBehaviour
         {
             case 1:
                 if (newRoom.roomUp)
-                    Instantiate(wallType.singleUp,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.singleUp,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomDown)
-                    Instantiate(wallType.singleDown,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.singleDown,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomLeft)
-                    Instantiate(wallType.singleLeft,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.singleLeft,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomRight)
-                    Instantiate(wallType.singleRight,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.singleRight,roomPosition,Quaternion.identity,Generate_Room_Door);
                 break;
             case 2:
                 if (newRoom.roomUp && newRoom.roomLeft)
-                    Instantiate(wallType.doubleUL,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.doubleUL,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomUp && newRoom.roomRight)
-                    Instantiate(wallType.doubleUR,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.doubleUR,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomDown && newRoom.roomLeft)
-                    Instantiate(wallType.doubleDL,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.doubleDL,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomDown && newRoom.roomRight)
-                    Instantiate(wallType.doubleDR,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.doubleDR,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomUp && newRoom.roomDown)
-                    Instantiate(wallType.doubleUD,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.doubleUD,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomLeft && newRoom.roomRight)
-                    Instantiate(wallType.doubleLR,roomPosition,Quaternion.identity);           
+                    Instantiate(wallType.doubleLR,roomPosition,Quaternion.identity,Generate_Room_Door);           
                 break;
             case 3:
                 if (newRoom.roomUp && newRoom.roomRight && newRoom.roomDown)
-                    Instantiate(wallType.tripleURD,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.tripleURD,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomUp && newRoom.roomLeft && newRoom.roomDown)
-                    Instantiate(wallType.tripleULD,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.tripleULD,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomUp && newRoom.roomLeft && newRoom.roomRight)
-                    Instantiate(wallType.tripleULR,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.tripleULR,roomPosition,Quaternion.identity,Generate_Room_Door);
                 if (newRoom.roomDown && newRoom.roomLeft && newRoom.roomRight)
-                    Instantiate(wallType.tripleDLR,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.tripleDLR,roomPosition,Quaternion.identity,Generate_Room_Door);
                 break;
             case 4:
                 if (newRoom.roomUp && newRoom.roomDown && newRoom.roomLeft && newRoom.roomRight)
-                    Instantiate(wallType.fourDoors,roomPosition,Quaternion.identity);
+                    Instantiate(wallType.fourDoors,roomPosition,Quaternion.identity,Generate_Room_Door);
                 break;
         }
 

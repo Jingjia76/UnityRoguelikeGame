@@ -60,7 +60,7 @@ public class RoomGenerator : MonoBehaviour
 
         //TODO:檢測房間_設定終點最遠房間距離
         //初始房間顏色改變
-        rooms[0].GetComponent<SpriteRenderer>().color = startColor;    
+        // rooms[0].GetComponent<SpriteRenderer>().color = startColor;    
 
         //預設為初始房間，這樣在比較時越比越大，離初始房間越遠
         endRoom = rooms[0].gameObject;
@@ -78,10 +78,10 @@ public class RoomGenerator : MonoBehaviour
         FindEndRoom();
 
         //最終房間顏色改變
-        endRoom.GetComponent<SpriteRenderer>().color = endColor;
+        // endRoom.GetComponent<SpriteRenderer>().color = endColor;
         //將最後一關改顏色
         endRoom.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.red;
-        // endRoom.tag = "AAA";
+        endRoom.tag = "EndRoom";
     }
 
     // Update is called once per frame

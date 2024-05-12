@@ -110,7 +110,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4992875096303495598}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4168025994014164303
 BoxCollider2D:
@@ -306,6 +306,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1293555167620689039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 395592462900710053}
+  m_Layer: 0
+  m_Name: InteractiveObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &395592462900710053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293555167620689039}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4992875096303495598}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3600016761773991191
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +736,7 @@ GameObject:
   - component: {fileID: 7876041567950763391}
   - component: {fileID: 4570246542209387599}
   - component: {fileID: 7273949487864542587}
+  - component: {fileID: 522241874139686924}
   m_Layer: 0
   m_Name: BasicRoom
   m_TagString: Untagged
@@ -727,6 +759,7 @@ Transform:
   - {fileID: 998435871876975579}
   - {fileID: 7132166205817418683}
   - {fileID: 9192396040881859921}
+  - {fileID: 395592462900710053}
   - {fileID: 8654059660978000724}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -769,8 +802,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -881789245
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1680694053, guid: 75dcbe51deb59d544aa8ce02337807b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -853,6 +886,24 @@ MonoBehaviour:
   stepToStartText: {fileID: 1753357599041480094}
   stepToStart: 0
   doorNumber: 0
+--- !u!114 &522241874139686924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5522417854384047194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7eace478381e15498442647300a9905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minOffset: {x: -7, y: -3}
+  maxOffset: {x: 7, y: 3}
+  minItemCount: 1
+  maxItemCount: 3
+  FindAddObjScriptName: RoomGenerator
+  itemPos: {fileID: 395592462900710053}
 --- !u!1 &7439080539153883151
 GameObject:
   m_ObjectHideFlags: 0

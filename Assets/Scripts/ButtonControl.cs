@@ -8,7 +8,8 @@ public class ButtonControl : MonoBehaviour
     public void StartGame() 
     {
         Debug.Log("開始遊戲");  
-        SceneManager.LoadScene(1);              
+        SceneManager.LoadScene(1);  
+        Time.timeScale = 1f;            
     }
     public void QuitGame() 
     {

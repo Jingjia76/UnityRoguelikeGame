@@ -16,6 +16,8 @@ public class PlayerData : MonoBehaviour
     private float currentTime = 0f; 
     private bool isTimerRunning = false; // 計時狀態
 
+    public GameObject endLook;         // 死亡顯示面板
+    public List<Text> endLookText = new List<Text>();
     
     // 玩家分數的属性
     public int GoldCoin
@@ -29,6 +31,7 @@ public class PlayerData : MonoBehaviour
     void Start()
     {
         isTimerRunning = true;
+        endLook.SetActive(false);
     }
 
     // Update is called once per frame
@@ -58,6 +61,16 @@ public class PlayerData : MonoBehaviour
     {
         rawMapBool = false;
         rawImage.SetActive(rawMapBool);
+        endLook.SetActive(true);
+        ChangData();
+    }
+
+    void ChangData()
+    {
+        endLookText[0].text = timerText.text;
+        endLookText[1].text = GoldCoin.ToString();
+        endLookText[2].text = "0";
+
     }
 
     void TimerCount()

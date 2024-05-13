@@ -47,7 +47,7 @@ public class ItemsSpawner : MonoBehaviour
         //TODO:如果是最後一關
         if (objectTag == "EndRoom")
         {
-            Debug.Log("到達最後一關");
+            Debug.Log("生成:到達最後一關");
             // 在原地生成離開出口
             GameObject selectedPrefab = itemController.itemPrefabs[0]; // 使用 ItemController 中的 itemPrefabs
             Vector3 spawnPosition = transform.position;

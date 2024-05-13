@@ -69,8 +69,7 @@ public class PlayerController : MonoBehaviour
             //執行離開或是顯示東西
             Debug.Log("碰到離開物件");
             // 強制轉成關閉
-            // playerData.rawMapBool = false;
-            // playerData.rawImage.SetActive(rawMapBool);
+            //離開遊戲的畫面要跑出來
             playerData.SeeMap_D();
 
             Time.timeScale = 0;
